@@ -1,0 +1,7 @@
+iTX：
+可以关闭日志（server.log）优化I/O，针对丢包的优化（在genisys.yml里面关闭check-movement就可以在网络差的情况下走路不瞬移）
+
+晴空：
+无限玩家数量(将server.properties中的 max-players 设置为-1)
+你可以自定义显示的版本号及颜色(pocketmine.yml 中 network 项下的 protocol 和 version 设置) 高效且有逻辑的红石系统
+兼容网络差的玩家，可以在netowrk下关闭作弊检测(anti-cheat)或者增大丢包允许率
