@@ -1,0 +1,143 @@
+本经验来自百度贴吧，原作ID：Shanwer
+
+#Check your language code on https://en.wikipedia.org/wiki/List_of_ISO_639-2_codes 
+ language: "chs"
+这里是语言文件的设置，目前已知支持中文的核心有itx和Tiwa核心
+设置为chs就可以使用中文了
+
+#Whether to send all strings translated to server locale or let the device handle them
+ force-language: false
+这里是强制语言，一般没啥事不要乱改
+
+shutdown-message: "Server closed"
+里面的“Server closed”可以修改，这个是在服务器关闭时告诉在服务器内的玩家服务器关闭了，使用[§]这个符号可以给说的话加上颜色
+
+#Allow listing plugins via Query
+ query-plugins: true
+这是允许你使用query协议查询插件的设置
+
+#Show a console message when a plugin uses deprecated API methods
+ deprecated-verbose: true
+这里是当你的插件使用了一些错误或者是不被推荐的API时自动在后台提醒
+
+#If set to auto, it’ll try to detect the number of cores (or use 2)
+ async-workers: auto
+这个对于现在的pocketmine来说没啥用，这是设置pocketmine最多能使用多少CPU内核，简称多线程(科普:PM只支持2.5个核心，然而没有2.5这样的CPU核心)
+
+#Main thread hard memory limit in megabytes. Set to 0 to disable
+ #This will stop the server when the limit is surpassed
+ main-hard-limit: 1024
+这个是用来设置服务器最多能够使用的内存，像我打了1024就说明服务器能使用1024MB的内存
+对，单位是MB
+
+#Threshold for batching packets, in bytes. Only these packets will be compressed
+ #Set to 0 to compress everything, -1 to disable.
+ batch-threshold: 256
+这是压缩数据包的设置，单位为字节
+设置为0会压缩全部，设为-1禁止使用这个功能，对带宽低的服务器会有一些帮助
+
+#Compression level used when sending batched packets. Higher = more CPU, less bandwidth usage
+ compression-level: 2
+这里是用来设置压缩等级的，等级越高占用CPU越高，带宽越少，请按服务器配置设置
+
+#Use AsyncTasks for compression. Adds half/one tick delay, less CPU load on main thread
+ async-compression: true
+异步压缩，设置了多线程后才可以有效，这是用来缓解主线程CPU负担的
+
+#Experimental, only for Windows. Tries to use UPnP to automatically port forward
+ upnp-forwarding: false
+这个是只有Windows系统才能使用的设置，这个是UPnP映射，有的路由器或许开启这个就可以不用端口映射了
+
+#If &gt; 1, it will show debug messages in the console
+ level: 1
+如果设置的等级大于1，它将会把调试信息显示到控制台
+
+#Enables /status, /gc
+ *s: true
+是否使用/status和/gc，true的话就启用这两项命令
+/status是显示服务器各项性能，类似于FCNK服务器的性能墙
+/gc是用来清理垃圾的，可以清理掉多余的区块，实体啥的
+
+#The default format that levels will use when *d
+ default-format: mcregion
+这是用来设置地图格式的，像PC地图就是如此
+
+#Automatically change levels tick rate to maintain 20 ticks per second
+ auto-tick-rate: false
+ auto-tick-rate-limit: 20
+用来保持level的单位时间(tick)的速度，第二个是用来设置最大单位时间为几的，不知道单位时间为几秒可以去看看Minecraftwiki
+
+#Sets the base tick rate (1 = 20 ticks per second, 2 = 10 ticks per second, etc.)
+ base-tick-rate: 1
+这个是设置单位时间的速率，如果你服务器配置高就随便弄吧
+
+always-tick-players: true
+始终维持玩家单位时间
+
+下面请根据服务器配置严格调整！
+下面请根据服务器配置严格调整！
+下面请根据服务器配置严格调整！
+重要的事情说三遍
+
+#Amount of chunks sent to players per tick
+ per-tick: 1
+一单位时间发送给玩家的区块数量
+太大会造成玩家客户端和服务端都卡顿，自己按服务器配置调整吧
+
+#Amount of chunks sent around each player
+ max-chunks: 32
+这个是用来设置有多少个区块会在玩家周围持续加载的，太多的话例如像Nukkit的逆天配置会直接爆服爆手机的
+
+#Amount of chunks that need to be sent before spawning the player
+ spawn-threshold: 28
+这个是设置当玩家进服时需要接收多少个区块，同上，不要调太多
+
+#Save a serialized copy of the chunk in memory for faster sending
+ #Useful in mostly-static worlds where lots of players join at the same time
+ cache-chunks: true
+这个是使用区块缓存，可以有效防止大量玩家进服造成的tps下降，不过得记得清理
+
+下面就是关于农作物以及诸多服务器问题的设置
+ #Max amount of chunks processed each tick
+ per-tick: 50
+这个是服务端每单位时间处理的区块数量，对大型生存服务器建议调大一点。
+ #Radius of chunks around a player to tick
+ tick-radius: 10
+这个是玩家周围半径处理的区块设置
+ light-*s: true
+在处理区块同时也是否进行光源更新
+ clear-tick-list: true
+是否在使用指令/gc或者别的插件触发事件时显示1tick能够清理多少的设置
+
+#Max. amount of chunks in the waiting queue to be generated
+ queue-size: 2
+在等待队列中，被生成的区块的数量上限，超过设置的这个数则不给予处理，就会造成卡区块的问题
+
+#Max. amount of chunks in the waiting queue to be populated
+ population-queue-size: 2
+在等待队列中，被填充的区块数量上限
+后果同上
+
+这个是周期设置，itx核心才有效，如果是插件会在文件夹里设置的
+ticks-per:
+ animal-spawns: 400
+设定隔多少单位时间生成一只动物
+ monster-spawns: 1
+设定隔多少单位时间生成一只怪物
+ autosave: 6000
+设定隔多少单位时间保存一次地图等数据
+ cache-cleanup: 900
+设置多少单位时间里清理一次不在区块内的生物
+
+这个是生成的生物上限，同itx核心有效
+spawn-limits:
+ monsters: 70
+ 生成怪物的最大数量
+animals: 15
+生成动物的最大数量
+ water-animals: 5
+生成水生生物的最大数量
+ ambient: 15
+生成地狱生物的最大数量
+
+感谢Shanwer的分享
