@@ -1,0 +1,120 @@
+转载自PocketMine吧
+直播贴：最近关于面板问题很火？直播面板是如何炼成
+发帖人：建立天网
+
+我来再加一把火！不可否认小学生面板确实多！
+虽然本人也是出租面板，但我基本上不在贴吧广告，走第三方平台！
+不能因为个人原因就一棍子打死所有人！
+下面直播vps变成面板！#(滑稽) 
+带你直观进入面板世界#(滑稽) 
+
+嗯，用手机，有点不方便！！
+首先准备主机或者vps一台！
+本人已经准备好练手云一台vps#(滑稽) 
+别问我练手云是什么【图片】
+
+首先一系列安装加上关闭防火墙#(滑稽) 
+#yum -y install wget
+#chkconfig --level 35 iptables off
+#/etc/init.d/iptables stop
+#yum -y install gcc gcc-c++ kernel-devel
+#yum install -y unzip zip
+#yum install mysql mysql-server
+#yum install httpd
+#yum install php
+#yum install php-mysql php-gd php-imap php-ldap php-odbc php-pear php-xml php-xmlrpc PHP
+
+/etc/init.d/mysqld start 启动数据库
+初始化数据库
+mysql_secure_installation
+因为头一次安装，所以没有密码，我们按下回车！
+然后会提示你是否更改密码，输入y
+然后设置密码
+重复设置
+后面一直按回车【图片】
+
+然后下载multicraft
+32位输入： wget http://www.multicraft.org/download  -O multicraft.tar.gz
+64位输入：wget http://www.multicraft.org/download?arch=linux64  -O multicraft.tar.gz
+下载完成后tar xvzf multicraft.tar.gz 来解压下载好的包
+解压完毕后输入 chmod -R 777 multicraft 设置777权限
+
+接着下载中文语言包，输入命令
+wget http://www.multicraft.org/files/translation/multicraft-translation-zh.zip 
+解压语言包，输入命令
+unzip multicraft-translation-zh.zip
+
+安装Multicraft
+cd multicraft
+./setup.sh
+按照依次顺序输入
+y
+然后11个回车键
+n
+mysql
+然后3个回车
+输入数据库密码
+然后一路回车到底！
+
+然后输入cd 回到主目录
+然后把语言包复制过去，输入命令
+cp -r protected /var/www/html/multicraft
+设置语言包的权限和拥有者，输入命令
+chmod 0755 /var/www/html/multicraft/protected/messages/zh
+chown -R apache.apache /var/www/html/multicraft/protected/messages/zh
+
+现在为Multicraft配置数据库
+输入命令
+mysql -uroot -p
+然后输入MySQL的root用户密码并回车，进入数据库。
+然后为Multicraft创建数据库，输入以下命令
+create database multicraft_panel;
+create database multicraft_daemon;
+exit;
+
+接下来由于需要修改一些配置，手机不方便使用ssh来修改，所以我直接用SFTP来改
+
+找到/etc/httpd/conf/httpd.conf
+找到这个.htaccess区域的
+ AllowOverride None
+改为 AllowOverride All
+
+/etc/init.d/httpd restart 来重启apache使各种配置生效
+然后打开浏览器输入http://你的主机ip/multicraft
+进入网页前台安装【图片】
+
+全绿代表设置都是成功，不绿自己检查【图片】
+
+选择mysql输入数据库账号密码【图片】
+
+正确后进入此界面，按钮变成initialize database【图片】
+
+进入此界面后点击上方login
+输入账号密码都是admin【图片】
+
+很多人奇怪为什么又恢复到原先的画面了！
+其实不然，multicraft是由两个数据库组成的！
+重复上面的一次就行了【图片】
+
+出现到这里基本上网页前端安装没啥大问题了，选择简体中文【图片】
+
+然后按照提示启动
+/home/minecraft/multicraft/bin/multicraft start【图片】
+
+启动成功是这个样子【图片】
+
+然后刷新网页，下一步完成安装【图片】
+
+最后别忘了更改admin密码
+删除安装页面
+rm /var/www/html/multicraft/install.php
+到这里一个面板就出来了，后面就是购买正版key(或者破解)然后就是编译php，上传核心。。。。最后拿出去开始出租【图片】【图片】
+
+所以说租服并不是看什么内存，面板内存随便给！
+真正的还是要主机配置，主机实际多大内存？什么U，多少带宽？这些才是关键！！【图片】
+
+直播结束
+
+【图片】
+
+我不知道各位想过没有，造成这个局面是整么来的。为什么小学生面板越来越多，还不是因为成本？一个正规的出租，主机钱，托管费一年下来花费多少成本大家算过没有？然而很多人都在问，你这内存这么低呀，人家都送多少多少，你这好贵啊，人家只要多少多少！然后逼着降价带来的后果是什么？超售啊，不超售整么收回成本？当然我不是说贵就一定好！我就提醒大家，莫贪便宜！
